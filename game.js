@@ -1,3 +1,4 @@
+window.location.reload(true);
 var appConfig = new cast.receiver.CastReceiverManager.Config();
 
 appConfig.statusText = 'Ready to play';
@@ -11,3 +12,5 @@ window.castReceiverManager.onSenderDisconnected = function(event) {
       window.close();
   }
 }
+
+//10.100.1.216

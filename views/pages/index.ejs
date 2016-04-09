@@ -98,7 +98,7 @@ function draw() {
         var winner;
         keys.forEach(function(key) {
             var player = gamePlayers[key]
-            if (player !== undefined && !player.dead) {
+            if (!player.dead) {
                 winner = player.color
             }
         })
@@ -106,20 +106,20 @@ function draw() {
         ctx.fillStyle = 'white'
         ctx.font = "48px serif"
         ctx.fillText("GAME OVER, WINNER: " + winner, 10, 50);
-        
+
         gamePlayers = {}
     }
 }
 
 function start() {
-    // gameManager.addEventListener(
-    //     cast.receiver.games.EventType.PLAYER_DATA_CHANGED,
-    //     function(event) {
-    //         // clearCanvas()
-    //         // ctx.fillStyle = 'white';
-    //         // ctx.font = "48px serif";
-    //         // ctx.fillText("Players: " + event.length,  100, 500);
-    //     });
+    gameManager.addEventListener(
+        cast.receiver.games.EventType.PLAYER_DATA_CHANGED,
+        function(event) {
+            clearCanvas()
+            ctx.fillStyle = 'white';
+            ctx.font = "48px serif";
+            ctx.fillText("Players: " + event.length,  100, 500);
+        });
 
     gameManager.addEventListener(
         cast.receiver.games.EventType.GAME_MESSAGE_RECEIVED,

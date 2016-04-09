@@ -4,20 +4,24 @@
     <meta charset="utf-8" />
     <title>Gamedev Canvas Workshop</title>
     <style>
-    	* { padding: 0; margin: 0; }
-    	canvas {
-            background: #eee;
-            display: block;
-            margin: 0 auto;
+        html, body {
+            width:  100%;
+            height: 100%;
+            margin: 0px;
         }
     </style>
 </head>
 <body>
 
 <canvas id="myCanvas" width="480" height="320"></canvas>
+<script src='helpers.js'></script>
+<script src='player.js'></script>
 
 <script>
 const canvas = document.getElementById("myCanvas")
+canvas.width = window.innerWidth
+canvas.height = window.innerHeight
+
 const ctx = canvas.getContext("2d")
 
 const GAME_SPEED = 5
@@ -34,116 +38,6 @@ const JUMPING_TOP_LIMIT = 300
 //keyboard
 const LEFT_KEY_CODE = 37
 const RIGHT_KEY_CODE = 39
-
-getRandom = (min, max) => {
-  return Math.random() * (max - min) + min;
-}
-
-getRandomInt = (min, max) => {
-  return Math.floor(Math.random() * (max - min)) + min;
-}
-
-getRandomColor = () => {
-    return COLORS[getRandomInt(0, COLORS.length)]
-}
-
-const clearCircle = (x, y, radius) => {
-    ctx.save()
-    ctx.beginPath()
-    //ctx.arc(this.x, this.y, this.width, 0, Math.PI * 2)
-    ctx.arc(x, y, radius * 1.2, 0, 2 * Math.PI)
-    ctx.clip()
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-    ctx.restore()
-}
-
-class Player {
-    constructor(x, y, color, name) {
-        this.x = x
-        this.y = y
-        this.color = color
-        this.name = name
-        this.width = SNAKE_WIDTH
-        this.speed = MOVEMENT_SPEED
-        this.steeringSpeed = STEERING_SPEED
-        this.left = false
-        this.right = false
-        this.dead = false
-        this.jumping = false
-
-        const randomAngle = getRandom(0, Math.PI * 2)
-        this.heading = randomAngle
-    }
-
-    updateHeading() {
-        if (this.left) {
-            this.heading -= this.steeringSpeed % Math.PI * 2
-        } else if (this.right) {
-            this.heading += this.steeringSpeed % Math.PI * 2
-        }
-    }
-
-    updatePosition() {
-        const heading = {
-            x: this.x + this.speed * Math.cos(this.heading),
-            y: this.y + this.speed * Math.sin(this.heading)
-        }
-        this.x = heading.x
-        this.y = heading.y
-    }
-
-    checkForColision() {
-        const threshold = 2.3
-        const heading = {
-            x: this.x + (this.width + threshold) * Math.cos(this.heading),
-            y: this.y + (this.width + threshold) * Math.sin(this.heading)
-        }
-
-        if (heading.x < 0 || heading.x > canvas.width) {
-            this.dead = true
-            return
-        } else if (heading.y < 0 || heading.y > canvas.height) {
-            this.dead = true
-            return
-        }
-
-        if (this.jumping) {
-            return
-        }
-
-        const p = ctx.getImageData(heading.x, heading.y, 1, 1).data
-        const filteredArray = p.filter((value) => {
-            return value !== 0
-        })
-        this.dead = filteredArray.length !== 0
-    }
-
-    draw() {
-        console.log('change')
-        if (this.dead) { return }
-
-        if (this.jumping) {
-            clearCircle(this.x, this.y, this.width)
-        }
-        if (this.jumping === false && Math.random() < JUMP_PROBABILITY) {
-            this.jumping = true
-            setTimeout(() => {
-                this.jumping = false
-            }, getRandomInt(JUMPING_BOTTOM_LIMIT, JUMPING_TOP_LIMIT))
-        }
-
-
-        this.updateHeading()
-        this.updatePosition()
-        this.checkForColision()
-
-        ctx.beginPath()
-        ctx.arc(this.x, this.y, this.width, 0, Math.PI * 2)
-        ctx.fillStyle = this.color
-        ctx.fill()
-        ctx.closePath()
-    }
-}
 
 var player1 = new Player(getRandom(0, canvas.width), getRandom(0, canvas.height), getRandomColor(), 'Sammy')
 

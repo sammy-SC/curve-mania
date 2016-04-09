@@ -34,6 +34,7 @@ var initialize = function() {
 
   castReceiverManager.onReady = function(event) {
     if (document.readyState === 'complete') {
+      console.log('Starting game.');
       startGame();
     } else {
       window.onload = startGame;
@@ -51,9 +52,22 @@ if (document.readyState === 'complete') {
 
 console.log('here')
 
-window.castReceiverManager.onSenderDisconnected = function(event) {
-    if(window.castReceiverManager.getSenders().length == 0 &&
-    event.reason == cast.receiver.system.DisconnectReason.REQUESTED_BY_SENDER) {
-        window.close();
-    }
+cast.games.starcast.StarcastGame = function(gameManager) {
+    console.log('init.');
+    this.gameManager_ = gameManager;
+    this.debugUi = new cast.receiver.games.debug.DebugUI(this.gameManager_);
+
+    this.gameManager_.debugUi.open()
+}
+
+cast.games.starcast.Starcastgame.prototype.start_ = function () {
+    console.log('start_');
+    this.gameManager_.addEventListener(
+        cast.receiver.games.EventType.PLAYER_AVAILABLE,
+        function(event) {
+            console.log('===================')
+            console.log(event)
+            console.log('===================')
+        }
+    )
 }

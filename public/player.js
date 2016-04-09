@@ -36,7 +36,7 @@ class Player {
     }
 
     checkForColision() {
-        const threshold = 2.3
+        const threshold = 3.0
         const heading = {
             x: this.x + (this.width + threshold) * Math.cos(this.heading),
             y: this.y + (this.width + threshold) * Math.sin(this.heading)

@@ -60,7 +60,9 @@ var gameLoop = null
 var gamePlayers = {}
 
 function draw() {
-    gamePlayers.forEach(function(player) {
+    var keys = Object.keys(gamePlayers)
+    keys.forEach(function(key) {
+        var player = gamePlayers[key]
         player.draw()
     })
 }

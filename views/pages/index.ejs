@@ -77,9 +77,19 @@ function start() {
     )
 
     gameManager.addEventListener(
-        cast.receiver.games.PlayerState.DROPPED,
+        cast.receiver.games.PlayerState.QUIT,
         function(event) {
             clearInterval(gameLoop)
+            console.log('===================')
+            console.log(event)
+            console.log('===================')
+        }
+    )
+
+
+    gameManager.addEventListener(
+        cast.receiver.games.LobbyState.OPEN,
+        function(event) {
             console.log('===================')
             console.log(event)
             console.log('===================')

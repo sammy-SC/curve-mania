@@ -72,14 +72,16 @@ function clearCanvas() {
 
 function draw() {
     var keys = Object.keys(gamePlayers)
-    var isSomebodyAlive = false
+    var alive = 0
     keys.forEach(function(key) {
         var player = gamePlayers[key]
         player.draw()
-        isSomebodyAlive = !player.dead
+        if (!player.dead) {
+            ++alive
+        }
     })
 
-    if (!isSomebodyAlive) {
+    if (!alive === 1) {
         clearInterval(gameLoop)
         clearCanvas()
         gameManager.updateGameplayState(cast.receiver.games.GameplayState.PAUSED, true);
@@ -92,9 +94,11 @@ function draw() {
 
 function start() {
     gameManager.onPlayerDataChanged = function(event) {
-        clearCanvas()
-        ctx.font = "48px serif"
-        ctx.fillText("NUMBER OF PLAYERS = " + event.length, 100, 500);
+        // clearCanvas()
+        // ctx.font = "48px serif"
+        // ctx.fillText("NUMBER OF PLAYERS = " + event.length, 100, 500);
+        console.log("PLAYER DATA CHANGE")
+        console.log(event)
     }
 
     gameManager.addEventListener(
@@ -102,10 +106,13 @@ function start() {
         function(event) {
             var isStart = event.requestExtraMessageData.action
             if (isStart === 'start' && !gameHasStarted) {
+                if (players.length >= 2 ) {
+                    return
+                }
+
                 clearCanvas()
                 gameHasStarted = true
                 var players = gameManager.getPlayers()
-                console.log(players)
 
                 for (var i = 0; i < players.length; i++) {
                     var player = players[i]

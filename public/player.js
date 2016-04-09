@@ -1,3 +1,5 @@
+'use strict';
+
 class Player {
     constructor(x, y, color, name) {
         this.x = x

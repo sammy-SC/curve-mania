@@ -71,6 +71,13 @@ function clearCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 }
 
+function showWaiting() {
+    clearCanvas()
+    ctx.fillStyle = 'white'
+    ctx.font = "48px serif"
+    ctx.fillText("Waiting for other players", 100, 500);
+}
+
 function draw() {
     var keys = Object.keys(gamePlayers)
     var alive = 0
@@ -107,7 +114,10 @@ function start() {
     gameManager.addEventListener(
         cast.receiver.games.EventType.PLAYER_DATA_CHANGED,
         function(event) {
-            console.log(event)
+            clearCanvas()
+            ctx.fillStyle = 'white'
+            ctx.font = "48px serif"
+            ctx.fillText("Players: " event.length, 100, 500);
         })
 
     gameManager.addEventListener(
@@ -185,9 +195,7 @@ var initialize = function() {
 
   castReceiverManager.onReady = function(event) {
     if (document.readyState === 'complete') {
-        ctx.fillStyle = 'white'
-        ctx.font = "48px serif"
-        ctx.fillText("Waiting for other players", 100, 500);
+        showWaiting()
         console.log('Starting game.');
         gameManager.updateGameplayState(cast.receiver.games.GameplayState.LOADING);
         startGame();

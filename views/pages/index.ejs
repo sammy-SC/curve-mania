@@ -60,12 +60,9 @@ var gameLoop = null
 var gamePlayers = {}
 
 function draw() {
-    console.log(canvas)
-    console.log(gamePlayers)
-    for (var i = 0; i < gamePlayers.length; i++) {
-        var player = gamePlayers[i]
+    gamePlayers.forEach(function(player) {
         player.draw()
-    }
+    })
 }
 
 function start() {
@@ -88,6 +85,7 @@ function start() {
                 console.log('STARTING')
                 return
             } else {
+                console.log(gamePlayers)
                 var playerId = event.playerInfo.playerId
                 var playerClass = gamePlayers[playerId]
                 var direction = event.requestExtraMessageData.direction

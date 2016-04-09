@@ -65,13 +65,27 @@ document.addEventListener("keyup", keyUpHandler, false)
 
 var gameLoop = null
 var gamePlayers = {}
+var gameHasStarted = false
+
+function clearCanvas() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+}
 
 function draw() {
     var keys = Object.keys(gamePlayers)
+    var isSomebodyAlive = false
     keys.forEach(function(key) {
         var player = gamePlayers[key]
         player.draw()
+        isSomebodyAlive = player.dead
     })
+
+    if (!isSomebodyAlive) {
+        clearInterval(gameLoop)
+        clearCanvas
+        ctx.font = "48px serif"
+        ctx.fillText("GAME OVER", 10, 50);
+    }
 }
 
 function start() {
@@ -79,7 +93,8 @@ function start() {
         cast.receiver.games.EventType.GAME_MESSAGE_RECEIVED,
         function(event) {
             var isStart = event.requestExtraMessageData.action
-            if (isStart === 'start') {
+            if (isStart === 'start' && !gameHasStarted) {
+                gameHasStarted = true
                 var players = gameManager.getPlayers()
                 console.log(players)
 
@@ -94,7 +109,7 @@ function start() {
                 gameLoop = setInterval(draw, GAME_SPEED)
                 console.log('STARTING')
                 return
-            } else {
+            } else if (gameHasStarted) {
                 console.log(gamePlayers)
                 var playerId = event.playerInfo.playerId
                 var playerClass = gamePlayers[playerId]

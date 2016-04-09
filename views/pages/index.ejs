@@ -61,67 +61,46 @@ function draw() {
 }
 
 var gameLoop = null
+var gamePlayers = {}
 
 function start() {
-    var debugUi = new cast.receiver.games.debug.DebugUI(gameManager);
-    debugUi.open()
-
-    console.log(cast.receiver.games.EventType)
-
-    gameManager.addEventListener(cast.receiver.games.EventType.PLAYER_DATA_CHANGED,
-        function(event) {
-            console.log(event)
-        })
-
-    gameManager.addEventListener(cast.receiver.games.EventType.PLAYER_AVAILABLE,
-        function(event) {
-            var playerId = event.playerInfo.playerId;
-            var senderId = gameManager.getSenderIdWithPlayerId(playerId);
-            var playerIds = gameManager.getPlayerIdsWithSenderId(senderId);
-            console.log('Player ' + playerId + ' available from sender ' + senderId);
-            console.log('All players on sender ' + senderId + ':');
-            console.dir(playerIds);
-        });
-
-    gameManager.addEventListener(
-        cast.receiver.games.EventType.PLAYER_QUIT,
-        function(event) {
-            clearInterval(gameLoop)
-            console.log(event)
-        }
-    )
-
-    gameManager.addEventListener(
-        cast.receiver.games.EventType.PLAYER_DROPPED,
-        function(event) {
-            clearInterval(gameLoop)
-            console.log(event)
-        }
-    )
-
-
-    gameManager.addEventListener(
-        cast.receiver.games.LobbyState.OPEN,
-        function(event) {
-            console.log(event)
-        }
-    )
-
-    gameManager.addEventListener(
-        cast.receiver.games.PlayerState.READY,
-        function(event) {
-            console.log(event)
-        }
-    )
-
     gameManager.addEventListener(
         cast.receiver.games.EventType.GAME_MESSAGE_RECEIVED,
         function(event) {
-            var playerId = event.playerInfo.playerId
-            console.log(event.playerInfo.playerId)
-            console.log(event.requestExtraMessageData.direction)
-            console.log(event.requestExtraMessageData.pressed)
-            gameManager.sendGameMessageToPlayer(playerId, "STRAJF")
+            var isStart = event.requestExtraMessageData.action
+
+            if (isStart == 'start') {
+                var players = gameManager.getPlayers()
+
+                for (var i = 0; i < players.length; i++) {
+                    var player = players[i]
+                    var playerClass[player.playerId] = new Player(getRandom(0, canvas.width),
+                                                        getRandom(0, canvas.height),
+                                                        COLORS[i],
+                                                        player.playerId);
+                    gamePlayers.push(playerClass);
+                    gameManager.sendGameMessageToPlayer(player.playerId, "GAME LUNCHED");
+                    console.log('sending message to')
+                    console.log(player.playerId)
+                }
+                gameManager.updateGameplayState(cast.receiver.games.GameplayState.RUNNING, true);
+                return
+            } else {
+                var playerId = event.playerInfo.playerId
+                var playerClass = gamePlayers[playerId]
+                var direction = event.requestExtraMessageData.direction
+                var pressed = event.requestExtraMessageData.pressed
+
+                if (direction === 'left') {
+                    playerClass.left = pressed
+                }
+
+                if (direction == 'right') {
+                    playerClass.right = pressed
+                }
+            }
+
+
         }
     )
 }
@@ -149,7 +128,6 @@ var initialize = function() {
 
   var startGame = function() {
       console.log('Game running.');
-      gameManager.updateGameplayState(cast.receiver.games.GameplayState.RUNNING, true);
       start()
       gameManager.updateGameStatusText('Game running.');
   };

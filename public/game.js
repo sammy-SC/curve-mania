@@ -47,10 +47,8 @@ if (document.readyState === 'complete') {
   initialize();
 } else {
   /** Main entry point. */
-//   window.onload = initialize;
+  window.onload = initialize;
 }
-
-console.log('here')
 
 cast.games.starcast.StarcastGame = function(gameManager) {
     console.log('init.');

@@ -56,12 +56,15 @@ function keyUpHandler(e) {
 document.addEventListener("keydown", keyDownHandler, false)
 document.addEventListener("keyup", keyUpHandler, false)
 
-function draw() {
-    player1.draw()
-}
-
 var gameLoop = null
 var gamePlayers = {}
+
+function draw() {
+    for (var i = 0; i < gamePlayers.length; i++) {
+        var player = gamePlayers[i]
+        player.draw()
+    }
+}
 
 function start() {
     gameManager.addEventListener(
@@ -80,6 +83,7 @@ function start() {
                     console.log(player.playerId)
                 }
                 gameManager.updateGameplayState(cast.receiver.games.GameplayState.RUNNING, true);
+                gameLoop = setInterval(draw, GAME_SPEED)
                 return
             } else {
                 var playerId = event.playerInfo.playerId

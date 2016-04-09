@@ -81,8 +81,10 @@ function start() {
             var isStart = event.requestExtraMessageData.action
             if (isStart === 'start') {
                 var players = gameManager.getPlayers()
+                console.log(players)
 
                 for (var i = 0; i < players.length; i++) {
+                    console.log(i)
                     var player = players[i]
                     gamePlayers[player.playerId] = new Player(getRandom(0, canvas.width), getRandom(0, canvas.height), COLORS[i], player.playerId);
                     gameManager.sendGameMessageToPlayer(player.playerId, "GAME LAUNCHED");

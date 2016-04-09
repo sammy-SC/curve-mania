@@ -25,7 +25,7 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 const ctx = canvas.getContext("2d")
-
+ctx.font = "48px serif"
 
 const GAME_SPEED = 5
 
@@ -33,7 +33,7 @@ const GAME_SPEED = 5
 const COLORS = ["red", "black", "orange", "blue"]
 const SNAKE_WIDTH = 3
 const MOVEMENT_SPEED = 1.5
-const STEERING_SPEED = 0.015
+const STEERING_SPEED = 0.02
 const JUMP_PROBABILITY = 0.001
 const JUMPING_BOTTOM_LIMIT = 500
 const JUMPING_TOP_LIMIT = 1000
@@ -86,15 +86,13 @@ function draw() {
         gameManager.updateGameplayState(cast.receiver.games.GameplayState.PAUSED, true);
         gamePlayers = {}
         gameHasStarted = false
-        ctx.font = "48px serif"
         ctx.fillText("GAME OVER", 10, 50);
     }
 }
 
 function start() {
     gameManager.onPlayerDataChanged = function(event) {
-        console.log("PLAYERS")
-        console.log(event)
+        ctx.fillText("NUMBER OF PLAYERS = " + event.length, 100, 50);
     }
 
     gameManager.addEventListener(

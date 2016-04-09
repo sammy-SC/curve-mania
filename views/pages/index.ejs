@@ -77,7 +77,7 @@ function draw() {
     keys.forEach(function(key) {
         var player = gamePlayers[key]
         player.draw()
-        isSomebodyAlive = player.dead
+        isSomebodyAlive = !player.dead
     })
 
     if (!isSomebodyAlive) {

@@ -6,7 +6,16 @@ function start() {
     var debugUi = new cast.receiver.games.debug.DebugUI(gameManager);
     debugUi.open()
     gameManager.addEventListener(
-        cast.receiver.games.EventType.PLAYER_AVAILABLE,
+        cast.receiver.games.PlayerState.AVAILABLE,
+        function(event) {
+            console.log('===================')
+            console.log(event)
+            console.log('===================')
+        }
+    )
+
+    gameManager.addEventListener(
+        cast.receiver.games.PlayerState.READY,
         function(event) {
             console.log('===================')
             console.log(event)

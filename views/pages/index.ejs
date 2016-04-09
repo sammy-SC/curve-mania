@@ -42,26 +42,25 @@
 			<h1 id="text">Ahoj, STRAJF!</h1>
 		</div>
 	</div>
-  	<video id='media' style="display:none"/>
   	<script>
-		    window.mediaElement = document.getElementById('media');
-		    window.mediaManager = new cast.receiver.MediaManager(window.mediaElement);
-		    window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
-    		try {
-    		    messageBus = window.castReceiverManager.getCastMessageBus(
-    		            'urn:x-cast:com.partytube',
-    		            cast.receiver.CastMessageBus.MessageType.JSON);
-    		}catch(e){
-    			document.getElementById('text').innerHTML = e.message;
-    		}
-
-    		window.castReceiverManager.start();
-
-    		messageBus.onMessage = function(event) {
-          var sender = event.senderId;
-          var message = event.data;
-          document.getElementById('text').innerHTML = message.test;
-        };
+		//     window.mediaElement = document.getElementById('media');
+		//     window.mediaManager = new cast.receiver.MediaManager(window.mediaElement);
+		//     window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
+    	// 	try {
+    	// 	    messageBus = window.castReceiverManager.getCastMessageBus(
+    	// 	            'urn:x-cast:com.partytube',
+    	// 	            cast.receiver.CastMessageBus.MessageType.JSON);
+    	// 	}catch(e){
+    	// 		document.getElementById('text').innerHTML = e.message;
+    	// 	}
+          //
+    	// 	window.castReceiverManager.start();
+          //
+    	// 	messageBus.onMessage = function(event) {
+        //   var sender = event.senderId;
+        //   var message = event.data;
+        //   document.getElementById('text').innerHTML = message.test;
+        // };
 	</script>
 </body>
 </html>

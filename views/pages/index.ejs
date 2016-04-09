@@ -127,7 +127,7 @@ function start() {
                     var color = COLORS[i]
 
                     gamePlayers[player.playerId] = new Player(getRandom(START_PADDING, canvas.width - START_PADDING), getRandom(START_PADDING, canvas.height - START_PADDING), color, player.playerId);
-                    console.log('sending message to ' + player.playerId)
+                    console.log('sending message to ' + player.playerId + ' color: ' + color)
                     gameManager.sendGameMessageToPlayer(player.playerId, color)
                 }
                 gameManager.sendGameMessageToAllConnectedPlayers("GAME LAUNCHED")

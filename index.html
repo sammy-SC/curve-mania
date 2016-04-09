@@ -119,12 +119,12 @@ class Player {
     }
 
     draw() {
+        console.log('change')
         if (this.dead) { return }
 
         if (this.jumping) {
             clearCircle(this.x, this.y, this.width)
         }
-
         if (this.jumping === false && Math.random() < JUMP_PROBABILITY) {
             this.jumping = true
             setTimeout(() => {

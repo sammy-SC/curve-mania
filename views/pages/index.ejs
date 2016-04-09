@@ -29,13 +29,14 @@ const ctx = canvas.getContext("2d")
 const GAME_SPEED = 15
 
 //snake shit
-const COLORS = ["red", "orange", "blue"]
+const COLORS = ["red", "orange", "blue", "green", "aqua", "lime", "teal", "white"]
 const SNAKE_WIDTH = 3
 const MOVEMENT_SPEED = 4.0
 const STEERING_SPEED = 0.05
-const JUMP_PROBABILITY = 0.001
+const JUMP_PROBABILITY = 0.005
 const JUMPING_BOTTOM_LIMIT = 500
 const JUMPING_TOP_LIMIT = 1000
+const START_PADDING = 250
 
 //keyboard
 const LEFT_KEY_CODE = 37
@@ -81,15 +82,23 @@ function draw() {
         }
     })
 
-    // console.log('players alive ' + alive)
     if (alive === 1) {
         clearInterval(gameLoop)
         clearCanvas()
         gameManager.updateGameplayState(cast.receiver.games.GameplayState.PAUSED, true);
         gamePlayers = {}
         gameHasStarted = false
+
+        var winner;
+        keys.forEach(function(key) {
+            var player = gamePlayers[key]
+            if (!player.dead) {
+                winner = player.color
+            }
+        })
+
         ctx.font = "48px serif"
-        ctx.fillText("GAME OVER", 10, 50);
+        ctx.fillText("GAME OVER, WINNER: " + winner, 10, 50);
     }
 }
 
@@ -115,8 +124,11 @@ function start() {
                 for (var i = 0; i < players.length; i++) {
                     var player = players[i]
                     console.log("Creating player with id: " + player.playerId)
-                    gamePlayers[player.playerId] = new Player(getRandom(100, canvas.width - 100), getRandom(100, canvas.height - 100), COLORS[i], player.playerId);
+                    var color = COLORS[i]
+
+                    gamePlayers[player.playerId] = new Player(getRandom(START_PADDING, canvas.width - START_PADDING), getRandom(START_PADDING, canvas.height - START_PADDING), color, player.playerId);
                     console.log('sending message to ' + player.playerId)
+                    gameManager.sendGameMessageToPlayer(player.playerId, color)
                 }
                 gameManager.sendGameMessageToAllConnectedPlayers("GAME LAUNCHED")
                 gameManager.updateGameplayState(cast.receiver.games.GameplayState.RUNNING);
@@ -163,7 +175,6 @@ var initialize = function() {
   /** @suppress {missingRequire} */
   var gameConfig = new cast.receiver.games.GameManagerConfig();
   gameConfig.applicationName = 'Curve Mania';
-  gameConfig.maxPlayer = 4
   /** @suppress {missingRequire} */
   gameManager = new cast.receiver.games.GameManager(gameConfig);
 

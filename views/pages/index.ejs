@@ -104,8 +104,6 @@ function start() {
                     playerClass.right = pressed
                 }
             }
-
-
         }
     )
 }
@@ -133,8 +131,8 @@ var initialize = function() {
 
   var startGame = function() {
       gameManager.updateGameplayState(cast.receiver.games.GameplayState.GAME_SHOWING_INFO_SCREEN, true);
-      start()
       gameManager.updateGameStatusText('Game running.');
+      start()
   };
 
   castReceiverManager.onReady = function(event) {
@@ -154,7 +152,6 @@ if (document.readyState === 'complete') {
   /** Main entry point. */
   window.onload = initialize;
 }
-
 </script>
 </body>
 </html>

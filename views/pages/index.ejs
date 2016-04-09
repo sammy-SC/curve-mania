@@ -71,6 +71,7 @@ function start() {
         cast.receiver.games.EventType.GAME_MESSAGE_RECEIVED,
         function(event) {
             var isStart = event.requestExtraMessageData.action
+            console.log(event)
             if (isStart === 'start') {
                 var players = gameManager.getPlayers()
 

@@ -109,7 +109,7 @@ function start() {
                     gameManager.sendGameMessageToPlayer(player.playerId, "GAME LAUNCHED");
                     console.log('sending message to ' + player.playerId)
                 }
-                gameManager.updateGameplayState(cast.receiver.games.GameplayState.RUNNING, true);
+                gameManager.updateGameplayState(cast.receiver.games.GameplayState.RUNNING);
                 gameLoop = setInterval(draw, GAME_SPEED)
                 console.log('STARTING')
                 return
@@ -166,6 +166,7 @@ var initialize = function() {
   castReceiverManager.onReady = function(event) {
     if (document.readyState === 'complete') {
       console.log('Starting game.');
+      gameManager.updateGameplayState(cast.receiver.games.GameplayState.LOADING);
       startGame();
     } else {
       window.onload = startGame;

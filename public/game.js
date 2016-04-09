@@ -1,15 +1,15 @@
-var appConfig = new cast.receiver.CastReceiverManager.Config();
-
-appConfig.statusText = 'Ready to play';
-appConfig.maxInactivity = 6000;
-
-window.castReceiverManager.start(appConfig);
-
-window.castReceiverManager.onSenderDisconnected = function(event) {
-  if(window.castReceiverManager.getSenders().length == 0 &&
-    event.reason == cast.receiver.system.DisconnectReason.REQUESTED_BY_SENDER) {
-      window.close();
-  }
-}
+// var appconfig = new cast.receiver.castreceivermanager.config();
+//
+// appconfig.statustext = 'ready to play';
+// appconfig.maxinactivity = 6000;
+//
+// window.castreceivermanager.start(appconfig);
+//
+// window.castreceivermanager.onsenderdisconnected = function(event) {
+//   if(window.castreceivermanager.getsenders().length == 0 &&
+//     event.reason == cast.receiver.system.disconnectreason.requested_by_sender) {
+//       window.close();
+//   }
+// }
 
 //10.100.1.216

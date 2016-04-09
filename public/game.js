@@ -19,7 +19,7 @@ var initialize = function() {
   // cast namespaces can be set up.
   /** @suppress {missingRequire} */
   var gameConfig = new cast.receiver.games.GameManagerConfig();
-  gameConfig.applicationName = 'Curve Mania';
+  gameConfig.applicationName = 'Starcast';
   /** @suppress {missingRequire} */
   var gameManager = new cast.receiver.games.GameManager(gameConfig);
   /** @suppress {missingRequire} */
@@ -46,5 +46,5 @@ if (document.readyState === 'complete') {
   initialize();
 } else {
   /** Main entry point. */
-  window.onload = initialize;
+//   window.onload = initialize;
 }

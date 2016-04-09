@@ -66,13 +66,9 @@ function start() {
     var debugUi = new cast.receiver.games.debug.DebugUI(gameManager);
     debugUi.open()
 
-    gameManager.addEventListener(
-        cast.receiver.games.EventType.PLAYER_AVAILABLE,
-        function(event) {
-            gameLoop = setInterval(draw, GAME_SPEED)
-            console.log(event)
-        }
-    )
+    gameManager.onPlayerAvailable = function(event) {
+        console.log('Player ' + event.playerInfo.playerId + ' is available')
+    }
 
     gameManager.addEventListener(
         cast.receiver.games.EventType.PLAYER_QUIT,
@@ -134,15 +130,14 @@ var initialize = function() {
   /** @suppress {missingRequire} */
   var gameConfig = new cast.receiver.games.GameManagerConfig();
   gameConfig.applicationName = 'Starcast';
+  gameConfig.maxPlayer = 4
   /** @suppress {missingRequire} */
   gameManager = new cast.receiver.games.GameManager(gameConfig);
 
   var startGame = function() {
       console.log('Game running.');
-      gameManager.updateGameplayState(cast.receiver.games.EventType.GAME_MESSAGE_RECEIVED, function(event) {
-          console.log(event)
-          start()
-      })
+      gameManager.updateGameplayState(cast.receiver.games.GameplayState.RUNNING, true);
+      start()
       gameManager.updateGameStatusText('Game running.');
   };
 

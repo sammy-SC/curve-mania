@@ -82,7 +82,10 @@ function draw() {
 
     if (!isSomebodyAlive) {
         clearInterval(gameLoop)
-        clearCanvas
+        clearCanvas()
+        gameManager.updateGameplayState(cast.receiver.games.GameplayState.PAUSED, true);
+        gamePlayers = {}
+        gameHasStarted = false
         ctx.font = "48px serif"
         ctx.fillText("GAME OVER", 10, 50);
     }
@@ -94,6 +97,7 @@ function start() {
         function(event) {
             var isStart = event.requestExtraMessageData.action
             if (isStart === 'start' && !gameHasStarted) {
+                clearCanvas()
                 gameHasStarted = true
                 var players = gameManager.getPlayers()
                 console.log(players)

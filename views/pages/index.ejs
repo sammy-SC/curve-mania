@@ -65,10 +65,18 @@ var gameLoop = null
 function start() {
     var debugUi = new cast.receiver.games.debug.DebugUI(gameManager);
     debugUi.open()
+    
+    console.log(cast.receiver.games.EventType)
 
-    gameManager.onPlayerAvailable = function(event) {
-        console.log('Player ' + event.playerInfo.playerId + ' is available')
-    }
+    gameManager.addEventListener(cast.receiver.games.EventType.PLAYER_AVAILABLE,
+        function(event) {
+            var playerId = event.playerInfo.playerId;
+            var senderId = gameManager.getSenderIdWithPlayerId(playerId);
+            var playerIds = gameManager.getPlayerIdsWithSenderId(senderId);
+            console.log('Player ' + playerId + ' available from sender ' + senderId);
+            console.log('All players on sender ' + senderId + ':');
+            console.dir(playerIds);
+        });
 
     gameManager.addEventListener(
         cast.receiver.games.EventType.PLAYER_QUIT,

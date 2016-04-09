@@ -97,6 +97,7 @@ function draw() {
             }
         })
 
+        ctx.fillStyle = 'white'
         ctx.font = "48px serif"
         ctx.fillText("GAME OVER, WINNER: " + winner, 10, 50);
     }
@@ -184,11 +185,12 @@ var initialize = function() {
 
   castReceiverManager.onReady = function(event) {
     if (document.readyState === 'complete') {
+        ctx.fillStyle = 'white'
         ctx.font = "48px serif"
         ctx.fillText("Waiting for other players", 100, 500);
-      console.log('Starting game.');
-      gameManager.updateGameplayState(cast.receiver.games.GameplayState.LOADING);
-      startGame();
+        console.log('Starting game.');
+        gameManager.updateGameplayState(cast.receiver.games.GameplayState.LOADING);
+        startGame();
     } else {
       window.onload = startGame;
     }

@@ -34,7 +34,7 @@ const SNAKE_WIDTH = 3
 const MOVEMENT_SPEED = 4.0
 const STEERING_SPEED = 0.05
 const JUMP_PROBABILITY = 0.005
-const JUMPING_BOTTOM_LIMIT = 500
+const JUMPING_BOTTOM_LIMIT = 250
 const JUMPING_TOP_LIMIT = 1000
 const START_PADDING = 250
 
@@ -114,10 +114,10 @@ function start() {
     gameManager.addEventListener(
         cast.receiver.games.EventType.PLAYER_DATA_CHANGED,
         function(event) {
-            clearCanvas()
-            ctx.fillStyle = 'white';
-            ctx.font = "48px serif";
-            ctx.fillText("Players: " + event.length,  100, 500);
+            // clearCanvas()
+            // ctx.fillStyle = 'white';
+            // ctx.font = "48px serif";
+            // ctx.fillText("Players: " + event.length,  100, 500);
         });
 
     gameManager.addEventListener(

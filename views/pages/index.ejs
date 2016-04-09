@@ -99,7 +99,7 @@ function draw() {
         var winner;
         keys.forEach(function(key) {
             var player = gamePlayers[key]
-            if (!player.dead) {
+            if (player !== undefined && !player.dead) {
                 winner = player.color
             }
         })

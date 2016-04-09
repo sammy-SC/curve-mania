@@ -1,6 +1,6 @@
 'use strict';
 
-var game = null;
+var gameManager = null;
 
 
 /**
@@ -21,9 +21,7 @@ var initialize = function() {
   var gameConfig = new cast.receiver.games.GameManagerConfig();
   gameConfig.applicationName = 'Starcast';
   /** @suppress {missingRequire} */
-  var gameManager = new cast.receiver.games.GameManager(gameConfig);
-  /** @suppress {missingRequire} */
-  game = new cast.games.starcast.StarcastGame(gameManager);
+  gameManager = new cast.receiver.games.GameManager(gameConfig);
 
   var startGame = function() {
     game.run(function() {
@@ -50,22 +48,15 @@ if (document.readyState === 'complete') {
   window.onload = initialize;
 }
 
-cast.games.starcast.StarcastGame = function(gameManager) {
-    console.log('init.');
-    this.gameManager_ = gameManager;
-    this.debugUi = new cast.receiver.games.debug.DebugUI(this.gameManager_);
+var debugUi = new cast.receiver.games.debug.DebugUI(gameManager);
 
-    this.gameManager_.debugUi.open()
-}
+gameManager.debugUi.open()
 
-cast.games.starcast.Starcastgame.prototype.start_ = function () {
-    console.log('start_');
-    this.gameManager_.addEventListener(
-        cast.receiver.games.EventType.PLAYER_AVAILABLE,
-        function(event) {
-            console.log('===================')
-            console.log(event)
-            console.log('===================')
-        }
-    )
-}
+gameManager.addEventListener(
+    cast.receiver.games.EventType.PLAYER_AVAILABLE,
+    function(event) {
+        console.log('===================')
+        console.log(event)
+        console.log('===================')
+    }
+)

@@ -92,7 +92,7 @@ function draw() {
 
 function start() {
     gameManager.onPlayerDataChanged = function(event) {
-        ctx.fillText("NUMBER OF PLAYERS = " + event.length, 100, 50);
+        ctx.fillText("NUMBER OF PLAYERS = " + event.length, 100, 500);
     }
 
     gameManager.addEventListener(

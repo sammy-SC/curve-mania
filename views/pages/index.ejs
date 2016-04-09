@@ -71,7 +71,7 @@ function start() {
         cast.receiver.games.EventType.GAME_MESSAGE_RECEIVED,
         function(event) {
             var isStart = event.requestExtraMessageData.action
-            if (isStart == 'start') {
+            if (isStart === 'start') {
                 var players = gameManager.getPlayers()
 
                 for (var i = 0; i < players.length; i++) {
@@ -130,7 +130,7 @@ var initialize = function() {
   gameManager = new cast.receiver.games.GameManager(gameConfig);
 
   var startGame = function() {
-      gameManager.updateGameplayState(cast.receiver.games.GameplayState.GAME_SHOWING_INFO_SCREEN, true);
+    //   gameManager.updateGameplayState(cast.receiver.games.GameplayState.GAME_SHOWING_INFO_SCREEN, true);
       gameManager.updateGameStatusText('Game running.');
       start()
   };

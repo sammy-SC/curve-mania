@@ -139,7 +139,7 @@ var initialize = function() {
 
   var startGame = function() {
       console.log('Game running.');
-      gameManager.updateGameplayeState(cast.receiver.games.EventType.GAME_MESSAGE_RECEIVED, function(event) {
+      gameManager.updateGameplayState(cast.receiver.games.EventType.GAME_MESSAGE_RECEIVED, function(event) {
           console.log(event)
           start()
       })

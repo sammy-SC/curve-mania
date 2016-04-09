@@ -71,25 +71,25 @@ function start() {
         cast.receiver.games.EventType.GAME_MESSAGE_RECEIVED,
         function(event) {
             var isStart = event.requestExtraMessageData.action
-
             if (isStart == 'start') {
                 var players = gameManager.getPlayers()
 
                 for (var i = 0; i < players.length; i++) {
                     var player = players[i]
                     gamePlayers[player.playerId] = new Player(getRandom(0, canvas.width), getRandom(0, canvas.height), COLORS[i], player.playerId);
-                    gameManager.sendGameMessageToPlayer(player.playerId, "GAME LUNCHED");
-                    console.log('sending message to')
-                    console.log(player.playerId)
+                    gameManager.sendGameMessageToPlayer(player.playerId, "GAME LAUNCHED");
+                    console.log('sending message to ' + player.playerId)
                 }
                 gameManager.updateGameplayState(cast.receiver.games.GameplayState.RUNNING, true);
                 gameLoop = setInterval(draw, GAME_SPEED)
+                console.log('STARTING')
                 return
             } else {
                 var playerId = event.playerInfo.playerId
                 var playerClass = gamePlayers[playerId]
                 var direction = event.requestExtraMessageData.direction
                 var pressed = event.requestExtraMessageData.pressed
+                console.log(direction + ' ' + pressed)
 
                 if (direction === 'left') {
                     playerClass.left = pressed

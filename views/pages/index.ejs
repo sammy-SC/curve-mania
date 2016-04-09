@@ -91,7 +91,6 @@ function draw() {
 
     if (alive === 1) {
         clearInterval(gameLoop)
-        clearCanvas()
         gameManager.updateGameplayState(cast.receiver.games.GameplayState.PAUSED, true);
         gameHasStarted = false
 

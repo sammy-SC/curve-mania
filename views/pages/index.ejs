@@ -115,10 +115,10 @@ function start() {
         cast.receiver.games.EventType.PLAYER_DATA_CHANGED,
         function(event) {
             clearCanvas()
-            ctx.fillStyle = 'white'
-            ctx.font = "48px serif"
-            ctx.fillText("Players: " event.length, 100, 500);
-        })
+            ctx.fillStyle = 'white';
+            ctx.font = "48px serif";
+            ctx.fillText("Players: " event.length,  100, 500);
+        });
 
     gameManager.addEventListener(
         cast.receiver.games.EventType.GAME_MESSAGE_RECEIVED,

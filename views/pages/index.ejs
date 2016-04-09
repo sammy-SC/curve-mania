@@ -25,7 +25,6 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 const ctx = canvas.getContext("2d")
-ctx.font = "48px serif"
 
 const GAME_SPEED = 5
 
@@ -86,12 +85,15 @@ function draw() {
         gameManager.updateGameplayState(cast.receiver.games.GameplayState.PAUSED, true);
         gamePlayers = {}
         gameHasStarted = false
+        ctx.font = "48px serif"
         ctx.fillText("GAME OVER", 10, 50);
     }
 }
 
 function start() {
     gameManager.onPlayerDataChanged = function(event) {
+        clearCanvas()
+        ctx.font = "48px serif"
         ctx.fillText("NUMBER OF PLAYERS = " + event.length, 100, 500);
     }
 
@@ -166,6 +168,8 @@ var initialize = function() {
 
   castReceiverManager.onReady = function(event) {
     if (document.readyState === 'complete') {
+        ctx.font = "48px serif"
+        ctx.fillText("Waiting for other players", 100, 500);
       console.log('Starting game.');
       gameManager.updateGameplayState(cast.receiver.games.GameplayState.LOADING);
       startGame();

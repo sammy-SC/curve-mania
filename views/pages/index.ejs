@@ -93,7 +93,6 @@ function draw() {
         clearInterval(gameLoop)
         clearCanvas()
         gameManager.updateGameplayState(cast.receiver.games.GameplayState.PAUSED, true);
-        gamePlayers = {}
         gameHasStarted = false
 
         var winner;
@@ -107,6 +106,8 @@ function draw() {
         ctx.fillStyle = 'white'
         ctx.font = "48px serif"
         ctx.fillText("GAME OVER, WINNER: " + winner, 10, 50);
+        
+        gamePlayers = {}
     }
 }
 

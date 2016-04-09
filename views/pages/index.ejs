@@ -93,13 +93,11 @@ function draw() {
 }
 
 function start() {
-    gameManager.onPlayerDataChanged = function(event) {
-        // clearCanvas()
-        // ctx.font = "48px serif"
-        // ctx.fillText("NUMBER OF PLAYERS = " + event.length, 100, 500);
-        console.log("PLAYER DATA CHANGE")
-        console.log(event)
-    }
+    gameManager.addEventListener(
+        cast.receiver.games.EventType.PLAYER_DATA_CHANGED,
+        function(event) {
+            console.log(event)
+        })
 
     gameManager.addEventListener(
         cast.receiver.games.EventType.GAME_MESSAGE_RECEIVED,
@@ -107,10 +105,8 @@ function start() {
             var isStart = event.requestExtraMessageData.action
             if (isStart === 'start' && !gameHasStarted) {
                 var players = gameManager.getPlayers()
-
-                if (players.length >= 2 ) {
-                    return
-                }
+                console.log("players")
+                console.log(players)
 
                 clearCanvas()
                 gameHasStarted = true

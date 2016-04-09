@@ -2,6 +2,17 @@
 
 var gameManager = null;
 
+function start() {
+    gameManager.debugUi.open()
+    gameManager.addEventListener(
+        cast.receiver.games.EventType.PLAYER_AVAILABLE,
+        function(event) {
+            console.log('===================')
+            console.log(event)
+            console.log('===================')
+        }
+    )
+}
 
 /**
  * Main entry point. This is not meant to be compiled so suppressing missing
@@ -24,10 +35,9 @@ var initialize = function() {
   gameManager = new cast.receiver.games.GameManager(gameConfig);
 
   var startGame = function() {
-    game.run(function() {
+      start()
       console.log('Game running.');
       gameManager.updateGameStatusText('Game running.');
-    });
   };
 
   castReceiverManager.onReady = function(event) {
@@ -49,14 +59,3 @@ if (document.readyState === 'complete') {
 }
 
 var debugUi = new cast.receiver.games.debug.DebugUI(gameManager);
-
-gameManager.debugUi.open()
-
-gameManager.addEventListener(
-    cast.receiver.games.EventType.PLAYER_AVAILABLE,
-    function(event) {
-        console.log('===================')
-        console.log(event)
-        console.log('===================')
-    }
-)

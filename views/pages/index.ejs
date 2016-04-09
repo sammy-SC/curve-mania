@@ -99,7 +99,9 @@ function start() {
         cast.receiver.games.EventType.GAME_MESSAGE_RECEIVED,
         function(event) {
             console.log('===================')
-            console.log(event)
+            console.log(event.playerInfo.playerId)
+            console.log(event.requestExtraMessageData.direction)
+            console.log(event.requestExtraMessageData.pressed)
             console.log('===================')
         }
     )

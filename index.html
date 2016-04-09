@@ -13,60 +13,62 @@
 </head>
 <body>
 
-<canvas id="myCanvas" width="480" height="320"></canvas>
+<h1>hello world</h1>
+<!-- <canvas id="myCanvas" width="480" height="320"></canvas> -->
 <script src='//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js'></script>
-<script src='helpers.js'></script>
+<!-- <script src='helpers.js'></script>
 <script src='game.js'></script>
-<script src='player.js'></script>
+<script src='player.js'></script> -->
 
 <script>
-const canvas = document.getElementById("myCanvas")
-canvas.width = window.innerWidth
-canvas.height = window.innerHeight
 
-const ctx = canvas.getContext("2d")
-
-const GAME_SPEED = 5
-
-//snake shit
-const COLORS = ["red", "black", "orange", "blue"]
-const SNAKE_WIDTH = 3
-const MOVEMENT_SPEED = 0.5
-const STEERING_SPEED = 0.01
-const JUMP_PROBABILITY = 0.001
-const JUMPING_BOTTOM_LIMIT = 100
-const JUMPING_TOP_LIMIT = 300
-
-//keyboard
-const LEFT_KEY_CODE = 37
-const RIGHT_KEY_CODE = 39
-
-var player1 = new Player(getRandom(0, canvas.width), getRandom(0, canvas.height), getRandomColor(), 'Sammy')
-
-keyDownHandler = (e) => {
-    if(e.keyCode == RIGHT_KEY_CODE) {
-        player1.right = true
-    } else if(e.keyCode == LEFT_KEY_CODE) {
-        player1.left = true
-    }
-}
-
-keyUpHandler = (e) => {
-    if(e.keyCode == RIGHT_KEY_CODE) {
-        player1.right = false
-    } else if(e.keyCode == LEFT_KEY_CODE) {
-        player1.left = false
-    }
-}
-
-document.addEventListener("keydown", keyDownHandler, false)
-document.addEventListener("keyup", keyUpHandler, false)
-
-function draw() {
-    player1.draw()
-}
-
-setInterval(draw, GAME_SPEED)
+// const canvas = document.getElementById("myCanvas")
+// canvas.width = window.innerWidth
+// canvas.height = window.innerHeight
+//
+// const ctx = canvas.getContext("2d")
+//
+// const GAME_SPEED = 5
+//
+// //snake shit
+// const COLORS = ["red", "black", "orange", "blue"]
+// const SNAKE_WIDTH = 3
+// const MOVEMENT_SPEED = 0.5
+// const STEERING_SPEED = 0.01
+// const JUMP_PROBABILITY = 0.001
+// const JUMPING_BOTTOM_LIMIT = 100
+// const JUMPING_TOP_LIMIT = 300
+//
+// //keyboard
+// const LEFT_KEY_CODE = 37
+// const RIGHT_KEY_CODE = 39
+//
+// var player1 = new Player(getRandom(0, canvas.width), getRandom(0, canvas.height), getRandomColor(), 'Sammy')
+//
+// keyDownHandler = (e) => {
+//     if(e.keyCode == RIGHT_KEY_CODE) {
+//         player1.right = true
+//     } else if(e.keyCode == LEFT_KEY_CODE) {
+//         player1.left = true
+//     }
+// }
+//
+// keyUpHandler = (e) => {
+//     if(e.keyCode == RIGHT_KEY_CODE) {
+//         player1.right = false
+//     } else if(e.keyCode == LEFT_KEY_CODE) {
+//         player1.left = false
+//     }
+// }
+//
+// document.addEventListener("keydown", keyDownHandler, false)
+// document.addEventListener("keyup", keyUpHandler, false)
+//
+// function draw() {
+//     player1.draw()
+// }
+//
+// setInterval(draw, GAME_SPEED)
 
 </script>
 

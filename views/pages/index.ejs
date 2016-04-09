@@ -65,8 +65,13 @@ var gameLoop = null
 function start() {
     var debugUi = new cast.receiver.games.debug.DebugUI(gameManager);
     debugUi.open()
-    
+
     console.log(cast.receiver.games.EventType)
+
+    gameManager.addEventListener(cast.receiver.games.EventType.PLAYER_DATA_CHANGED,
+        function(event) {
+            console.log(event)
+        })
 
     gameManager.addEventListener(cast.receiver.games.EventType.PLAYER_AVAILABLE,
         function(event) {

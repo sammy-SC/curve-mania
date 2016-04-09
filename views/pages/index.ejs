@@ -60,7 +60,8 @@ var gameLoop = null
 var gamePlayers = {}
 
 function draw() {
-    console.log("DRAWING MOTHER FUCKER")
+    console.log(canvas)
+    console.log(gamePlayers.length)
     for (var i = 0; i < gamePlayers.length; i++) {
         var player = gamePlayers[i]
         player.draw()

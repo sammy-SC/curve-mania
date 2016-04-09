@@ -3,7 +3,8 @@
 var gameManager = null;
 
 function start() {
-    gameManager.debugUi.open()
+    var debugUi = new cast.receiver.games.debug.DebugUI(gameManager);
+    debugUi.open()
     gameManager.addEventListener(
         cast.receiver.games.EventType.PLAYER_AVAILABLE,
         function(event) {
@@ -35,8 +36,8 @@ var initialize = function() {
   gameManager = new cast.receiver.games.GameManager(gameConfig);
 
   var startGame = function() {
-      start()
       console.log('Game running.');
+      start()
       gameManager.updateGameStatusText('Game running.');
   };
 
@@ -57,5 +58,3 @@ if (document.readyState === 'complete') {
   /** Main entry point. */
   window.onload = initialize;
 }
-
-var debugUi = new cast.receiver.games.debug.DebugUI(gameManager);

@@ -131,7 +131,6 @@ class Player {
     }
 }
 
-
 const canvas = document.getElementById("myCanvas")
 const ctx = canvas.getContext("2d")
 
@@ -155,7 +154,7 @@ const RIGHT_KEY_CODE = 39
 
 var player1 = new Player(getRandom(0, canvas.width), getRandom(0, canvas.height), getRandomColor(), 'Sammy')
 
-keyDownHandler = (e) => {
+function keyDownHandler (e) {
     if(e.keyCode == RIGHT_KEY_CODE) {
         player1.right = true
     } else if(e.keyCode == LEFT_KEY_CODE) {
@@ -163,7 +162,7 @@ keyDownHandler = (e) => {
     }
 }
 
-keyUpHandler = (e) => {
+function keyUpHandler(e) {
     if(e.keyCode == RIGHT_KEY_CODE) {
         player1.right = false
     } else if(e.keyCode == LEFT_KEY_CODE) {

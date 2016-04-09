@@ -1,75 +1,67 @@
-<!DOCTYPE html>
+
 <html>
 <head>
-    <meta charset="utf-8" />
-    <title>Gamedev Canvas Workshop</title>
-    <style>
-        html, body {
-            width:  100%;
-            height: 100%;
-            margin: 0px;
-        }
-    </style>
+  <title>Example minimum receiver</title>
+  <script src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
+  <style>
+  	.app {
+  		position: absolute;
+  		top: 0;
+  		left: 0;
+  		right: 0;
+  		bottom: 0;
+  		width: 100%;
+  		height: 100%;
+  		background: black;
+  		color: white;
+  	}
+  		.app > .container {
+  			 margin: auto;
+			 position: absolute;
+			 top: 0;
+			 left: 0;
+			 bottom: 0;
+			 right: 0;
+			 background: rgb(229, 54, 56);
+			 width: 600px;
+			 height: 300px;
+  		}
+  			.app > .container > h1 {
+  				text-transform: uppercase;
+  				text-align: center;
+  				line-height: 300px;
+  				font-size: 3em;
+  				margin: 0;
+  				padding: 0;
+  			}
+  </style>
 </head>
 <body>
+	<div class="app">
+		<div class="container">
+			<h1 id="text">Ahoj, STRV!</h1>
+		</div>
+	</div>
+  	<video id='media' style="display:none"/>
+  	<script>
+		    window.mediaElement = document.getElementById('media');
+		    window.mediaManager = new cast.receiver.MediaManager(window.mediaElement);
+		    window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
+    		try {
+    		    messageBus = window.castReceiverManager.getCastMessageBus(
+    		            'urn:x-cast:com.partytube',
+    		            cast.receiver.CastMessageBus.MessageType.JSON);
+    		}catch(e){
+    			document.getElementById('text').innerHTML = e.message;
+    		}
 
-<canvas id="myCanvas" width="480" height="320"></canvas>
-<script src='//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js'></script>
-<!-- <script src='helpers.js'></script> -->
-<script src='game.js'></script>
-<h1>HERE FUCKER</h1>
-<!-- <script src='player.js'></script>
+    		window.castReceiverManager.start();
 
-<script>
-const canvas = document.getElementById("myCanvas")
-canvas.width = window.innerWidth
-canvas.height = window.innerHeight
-
-const ctx = canvas.getContext("2d")
-
-const GAME_SPEED = 5
-
-//snake shit
-const COLORS = ["red", "black", "orange", "blue"]
-const SNAKE_WIDTH = 3
-const MOVEMENT_SPEED = 0.5
-const STEERING_SPEED = 0.01
-const JUMP_PROBABILITY = 0.001
-const JUMPING_BOTTOM_LIMIT = 100
-const JUMPING_TOP_LIMIT = 300
-
-//keyboard
-const LEFT_KEY_CODE = 37
-const RIGHT_KEY_CODE = 39
-
-var player1 = new Player(getRandom(0, canvas.width), getRandom(0, canvas.height), getRandomColor(), 'Sammy')
-
-keyDownHandler = (e) => {
-    if(e.keyCode == RIGHT_KEY_CODE) {
-        player1.right = true
-    } else if(e.keyCode == LEFT_KEY_CODE) {
-        player1.left = true
-    }
-}
-
-keyUpHandler = (e) => {
-    if(e.keyCode == RIGHT_KEY_CODE) {
-        player1.right = false
-    } else if(e.keyCode == LEFT_KEY_CODE) {
-        player1.left = false
-    }
-}
-
-document.addEventListener("keydown", keyDownHandler, false)
-document.addEventListener("keyup", keyUpHandler, false)
-
-function draw() {
-    player1.draw()
-}
-
-setInterval(draw, GAME_SPEED)
-
-</script> -->
-
+    		messageBus.onMessage = function(event) {
+          var sender = event.senderId;
+          var message = event.data;
+          document.getElementById('text').innerHTML = message.test;
+        };
+	</script>
 </body>
 </html>

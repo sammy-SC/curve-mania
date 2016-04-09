@@ -115,6 +115,8 @@ function start() {
     gameManager.addEventListener(
         cast.receiver.games.EventType.PLAYER_DATA_CHANGED,
         function(event) {
+            console.log("players")
+            console.log(event)
             clearCanvas()
             ctx.fillStyle = 'white';
             ctx.font = "48px serif";
@@ -127,8 +129,6 @@ function start() {
             var isStart = event.requestExtraMessageData.action
             if (isStart === 'start' && !gameHasStarted) {
                 var players = gameManager.getPlayers()
-                console.log("players")
-                console.log(players)
 
                 clearCanvas()
                 gameHasStarted = true

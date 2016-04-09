@@ -106,13 +106,14 @@ function start() {
         function(event) {
             var isStart = event.requestExtraMessageData.action
             if (isStart === 'start' && !gameHasStarted) {
+                var players = gameManager.getPlayers()
+
                 if (players.length >= 2 ) {
                     return
                 }
 
                 clearCanvas()
                 gameHasStarted = true
-                var players = gameManager.getPlayers()
 
                 for (var i = 0; i < players.length; i++) {
                     var player = players[i]

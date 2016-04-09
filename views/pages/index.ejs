@@ -111,14 +111,14 @@ function draw() {
 }
 
 function start() {
-    gameManager.addEventListener(
-        cast.receiver.games.EventType.PLAYER_DATA_CHANGED,
-        function(event) {
-            // clearCanvas()
-            // ctx.fillStyle = 'white';
-            // ctx.font = "48px serif";
-            // ctx.fillText("Players: " + event.length,  100, 500);
-        });
+    // gameManager.addEventListener(
+    //     cast.receiver.games.EventType.PLAYER_DATA_CHANGED,
+    //     function(event) {
+    //         // clearCanvas()
+    //         // ctx.fillStyle = 'white';
+    //         // ctx.font = "48px serif";
+    //         // ctx.fillText("Players: " + event.length,  100, 500);
+    //     });
 
     gameManager.addEventListener(
         cast.receiver.games.EventType.GAME_MESSAGE_RECEIVED,
@@ -178,15 +178,10 @@ var initialize = function() {
   var appConfig = new cast.receiver.CastReceiverManager.Config();
 
   appConfig.statusText = 'Curve Mania';
-  // In production, use the default maxInactivity instead of using this.
   appConfig.maxInactivity = 6000;
 
-  // Create the game before starting castReceiverManager to make sure any extra
-  // cast namespaces can be set up.
-  /** @suppress {missingRequire} */
   var gameConfig = new cast.receiver.games.GameManagerConfig();
   gameConfig.applicationName = 'Curve Mania';
-  /** @suppress {missingRequire} */
   gameManager = new cast.receiver.games.GameManager(gameConfig);
 
   var startGame = function() {

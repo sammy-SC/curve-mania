@@ -26,13 +26,13 @@ canvas.height = window.innerHeight;
 
 const ctx = canvas.getContext("2d")
 
-const GAME_SPEED = 10
+const GAME_SPEED = 15
 
 //snake shit
 const COLORS = ["red", "orange", "blue"]
 const SNAKE_WIDTH = 3
-const MOVEMENT_SPEED = 3.0
-const STEERING_SPEED = 0.02
+const MOVEMENT_SPEED = 4.0
+const STEERING_SPEED = 0.03
 const JUMP_PROBABILITY = 0.001
 const JUMPING_BOTTOM_LIMIT = 500
 const JUMPING_TOP_LIMIT = 1000
@@ -110,7 +110,7 @@ function start() {
                 for (var i = 0; i < players.length; i++) {
                     var player = players[i]
                     console.log("Creating player with id: " + player.playerId)
-                    gamePlayers[player.playerId] = new Player(getRandom(0, canvas.width), getRandom(0, canvas.height), COLORS[i], player.playerId);
+                    gamePlayers[player.playerId] = new Player(getRandom(100, canvas.width - 100), getRandom(100, canvas.height - 100), COLORS[i], player.playerId);
                     console.log('sending message to ' + player.playerId)
                 }
                 gameManager.sendGameMessageToAllConnectedPlayers("GAME LAUNCHED")

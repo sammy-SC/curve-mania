@@ -107,7 +107,7 @@ function start() {
 
                 for (var i = 0; i < players.length; i++) {
                     var player = players[i]
-                    console.log("Creating player with id: " player.playerId)
+                    console.log("Creating player with id: " + player.playerId)
                     gamePlayers[player.playerId] = new Player(getRandom(0, canvas.width), getRandom(0, canvas.height), COLORS[i], player.playerId);
                     console.log('sending message to ' + player.playerId)
                 }

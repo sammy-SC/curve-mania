@@ -70,19 +70,15 @@ function start() {
         cast.receiver.games.EventType.PLAYER_AVAILABLE,
         function(event) {
             gameLoop = setInterval(draw, GAME_SPEED)
-            console.log('===================')
             console.log(event)
-            console.log('===================')
         }
     )
 
     gameManager.addEventListener(
-        cast.receiver.games.EventType.PLAYER_AVAILABLE,
+        cast.receiver.games.EventType.PLAYER_QUIT,
         function(event) {
             clearInterval(gameLoop)
-            console.log('===================')
             console.log(event)
-            console.log('===================')
         }
     )
 
@@ -90,9 +86,7 @@ function start() {
         cast.receiver.games.EventType.PLAYER_DROPPED,
         function(event) {
             clearInterval(gameLoop)
-            console.log('===================')
             console.log(event)
-            console.log('===================')
         }
     )
 
@@ -100,31 +94,25 @@ function start() {
     gameManager.addEventListener(
         cast.receiver.games.LobbyState.OPEN,
         function(event) {
-            console.log('===================')
             console.log(event)
-            console.log('===================')
         }
     )
 
     gameManager.addEventListener(
         cast.receiver.games.PlayerState.READY,
         function(event) {
-            console.log('===================')
             console.log(event)
-            console.log('===================')
         }
     )
 
     gameManager.addEventListener(
         cast.receiver.games.EventType.GAME_MESSAGE_RECEIVED,
         function(event) {
-            console.log('===================')
             var playerId = event.playerInfo.playerId
             console.log(event.playerInfo.playerId)
             console.log(event.requestExtraMessageData.direction)
             console.log(event.requestExtraMessageData.pressed)
             gameManager.sendGameMessageToPlayer(playerId, "STRAJF")
-            console.log('===================')
         }
     )
 }
@@ -151,7 +139,10 @@ var initialize = function() {
 
   var startGame = function() {
       console.log('Game running.');
-      start()
+      gameManager.updateGameplayeState(cast.receiver.games.EventType.GAME_MESSAGE_RECEIVED, function(event) {
+          console.log(event)
+          start()
+      })
       gameManager.updateGameStatusText('Game running.');
   };
 

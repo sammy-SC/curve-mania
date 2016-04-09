@@ -106,8 +106,8 @@ function start() {
                 console.log(players)
 
                 for (var i = 0; i < players.length; i++) {
-                    console.log(i)
                     var player = players[i]
+                    console.log("Creating player with id: " player.playerId)
                     gamePlayers[player.playerId] = new Player(getRandom(0, canvas.width), getRandom(0, canvas.height), COLORS[i], player.playerId);
                     console.log('sending message to ' + player.playerId)
                 }
@@ -116,12 +116,11 @@ function start() {
                 gameLoop = setInterval(draw, GAME_SPEED)
                 console.log('STARTING')
             } else if (gameHasStarted) {
-                console.log(gamePlayers)
                 var playerId = event.playerInfo.playerId
                 var playerClass = gamePlayers[playerId]
                 var direction = event.requestExtraMessageData.direction
                 var pressed = event.requestExtraMessageData.pressed
-                console.log(direction + ' ' + pressed)
+                console.log(playerId + ' == ' + direction + ' ' + pressed)
 
                 if (playerClass === undefined) {
                     console.log ("UNDEFINED PLAYER")

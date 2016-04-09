@@ -142,7 +142,7 @@ var initialize = function() {
   var castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
   var appConfig = new cast.receiver.CastReceiverManager.Config();
 
-  appConfig.statusText = 'Starcast';
+  appConfig.statusText = 'Curve Mania';
   // In production, use the default maxInactivity instead of using this.
   appConfig.maxInactivity = 6000;
 
@@ -150,14 +150,13 @@ var initialize = function() {
   // cast namespaces can be set up.
   /** @suppress {missingRequire} */
   var gameConfig = new cast.receiver.games.GameManagerConfig();
-  gameConfig.applicationName = 'Starcast';
+  gameConfig.applicationName = 'Curve Mania';
   gameConfig.maxPlayer = 4
   /** @suppress {missingRequire} */
   gameManager = new cast.receiver.games.GameManager(gameConfig);
 
   var startGame = function() {
-    //   gameManager.updateGameplayState(cast.receiver.games.GameplayState.GAME_SHOWING_INFO_SCREEN, true);
-      gameManager.updateGameStatusText('Game running.');
+      gameManager.updateGameplayState(cast.receiver.games.GameplayState.LOADING, true);
       start()
   };
 

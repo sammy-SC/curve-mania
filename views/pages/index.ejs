@@ -99,9 +99,11 @@ function start() {
         cast.receiver.games.EventType.GAME_MESSAGE_RECEIVED,
         function(event) {
             console.log('===================')
+            var playerId = event.playerInfo.playerId
             console.log(event.playerInfo.playerId)
             console.log(event.requestExtraMessageData.direction)
             console.log(event.requestExtraMessageData.pressed)
+            gameManager.sendGameMessageToPlayer(playerId, "STRAJF")
             console.log('===================')
         }
     )

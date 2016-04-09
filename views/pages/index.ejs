@@ -92,6 +92,11 @@ function draw() {
 }
 
 function start() {
+    gameManager.onPlayerDataChanged = function(event) {
+        console.log("PLAYERS")
+        console.log(event)
+    }
+
     gameManager.addEventListener(
         cast.receiver.games.EventType.GAME_MESSAGE_RECEIVED,
         function(event) {
@@ -106,13 +111,12 @@ function start() {
                     console.log(i)
                     var player = players[i]
                     gamePlayers[player.playerId] = new Player(getRandom(0, canvas.width), getRandom(0, canvas.height), COLORS[i], player.playerId);
-                    gameManager.sendGameMessageToPlayer(player.playerId, "GAME LAUNCHED");
                     console.log('sending message to ' + player.playerId)
                 }
+                gameManager.sendGameMessageToAllConnectedPlayers("GAME LAUNCHED")
                 gameManager.updateGameplayState(cast.receiver.games.GameplayState.RUNNING);
                 gameLoop = setInterval(draw, GAME_SPEED)
                 console.log('STARTING')
-                return
             } else if (gameHasStarted) {
                 console.log(gamePlayers)
                 var playerId = event.playerInfo.playerId

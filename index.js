@@ -4,7 +4,7 @@ var cors = require('cors');
 
 app.set('port', (process.env.PORT || 5000));
 
-app.use(cors())
+ app.use(cors())
 
 app.use(express.static(__dirname + '/public'));
 
@@ -13,6 +13,7 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 app.get('/', function(request, response) {
+    console.log('HERE')
   response.render('pages/index');
 });
 

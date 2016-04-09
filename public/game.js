@@ -1,4 +1,3 @@
-window.location.reload(true);
 var appConfig = new cast.receiver.CastReceiverManager.Config();
 
 appConfig.statusText = 'Ready to play';

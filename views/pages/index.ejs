@@ -91,6 +91,11 @@ function start() {
                 var pressed = event.requestExtraMessageData.pressed
                 console.log(direction + ' ' + pressed)
 
+                if (playerClass === undefined) {
+                    console.log ("UNDEFINED PLAYER")
+                    return
+                }
+
                 if (direction === 'left') {
                     playerClass.left = pressed
                 }
@@ -127,7 +132,7 @@ var initialize = function() {
   gameManager = new cast.receiver.games.GameManager(gameConfig);
 
   var startGame = function() {
-      console.log('Game running.');
+      gameManager.updateGameplayState(cast.receiver.games.GameplayState.GAME_SHOWING_INFO_SCREEN, true);
       start()
       gameManager.updateGameStatusText('Game running.');
   };
